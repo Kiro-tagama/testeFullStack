@@ -1,58 +1,53 @@
-import axios from "axios";
-import { useEffect, useState } from "react"
-
-interface PropsData{
-  id:           Number     
-  name:         String
-  description:  String
-  status:       "Disponível"| "Reservado" | "Em Uso"
-  initial_date: Date
-  final_date:   Date
-  user:         String
-}
+import { Cards } from "../components/Cards";
+import { Link } from "react-router-dom";
+import { useGerenciamento } from "../hooks/useGerenciamento";
 
 export default function Gerenciar() {
-  const [data, setData] = useState<PropsData[]>();
-
-  function getData(){
-    axios.get("http://localhost:3000/tools")
-    .then(res=>setData(res.data))
-    console.log("getdata called");
-    
-  }
-
-  useEffect(() =>{
-    getData()
-    console.log("aqui");
-    
-  },[])
+  const {data, search, setSearch} = useGerenciamento()
 
   return(
     <main>
-      <div>
-        <input type="text" placeholder="buscar" />
-        <button onClick={getData}>R</button>
+      <nav> 
+        <div>
+          <Link to={'/'} style={{padding:0,margin:0}} >
+            <button className="outline contrast">{"<"} Voltar</button>
+          </Link>
+          
+          <input type="search" placeholder="buscar por nome ou id" value={search} style={{width:"auto"}} onChange={txt=>setSearch(txt.target.value)}/>
+  
+          <details role="list">
+            <summary aria-haspopup="listbox">Status <span style={{width:"3rem"}}/></summary>
+            <ul role="listbox" >
+              <li>
+                <label>
+                  <input type="checkbox"></input>
+                  Disponível
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox"></input>
+                  Reservado
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox"></input>
+                  Em Uso
+                </label>
+              </li>
+            </ul>
+          </details>
+        </div>
+        
+      </nav>
+      <div className="areaCards">
+        {data != null?
+          data.map((data) =><Cards data={data}/>)
+          : 
+          <article aria-busy="true" style={{backgroundColor:"transparent"}}></article>
+        }
       </div>
-      {data?
-      data.map((data:PropsData) =>{
-        const {id,name,
-          description,
-          status,
-          initial_date,
-          final_date,
-          user} = data
-
-        return(
-          <article className="card">
-            <h4>{name +"\t#"+id}</h4>
-            <p>{description}</p>
-            <span>{status}</span>
-            {status == "Disponível"}
-          </article>
-        )
-      }): <article aria-busy="true" style={{backgroundColor:"transparent"}}></article>
-
-      }
     </main>
   )
 }

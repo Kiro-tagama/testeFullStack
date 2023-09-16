@@ -3,14 +3,11 @@ body{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 0;
 }
 main{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
   min-height: 100%;
+  margin: auto;
   gap: 1rem;
 }
 main div{
@@ -18,7 +15,42 @@ main div{
   flex-direction: row;
   gap: 1rem;
 }
+
+main nav{
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding:1rem;
+  padding-bottom: 0;
+  backdrop-filter: blur(2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+main nav> div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+details{
+  border: 0;
+}
+
+main .areaCards{
+  display: grid;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+}
 main .card{
-  border: 2px solid aqua;
+  border: 2px solid #1095c1;
   margin: 0;
+}
+
+.init a{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
 }

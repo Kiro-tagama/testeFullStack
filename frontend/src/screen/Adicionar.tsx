@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react"
+import { Link } from "react-router-dom";
 
 interface PropsData{
   name:         String
@@ -14,13 +15,14 @@ export default function Adicionar() {
 
   function postData(){
     if (data.name.length >= 3) {
-      axios.post("http://localhost:3000/newTools")
+      axios.post("http://localhost:3000/newTools",data)
       console.log("getdata called");
     }
   }
   return(
-    <main>
-      <h3>New Tool</h3>
+    <main style={{display:"grid",justifyContent:"center"}}>
+      <h3 style={{marginBottom:2}}>New Tool</h3>
+      <Link to={"/"}>{"<"} Voltar</Link>
       <form action="">
         <label htmlFor="">Nome</label>
         <input type="text" placeholder="Chave de Fenda" 

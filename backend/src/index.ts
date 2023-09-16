@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { addTools } from './methods/setters';
+import { addTools, delTool, editTools } from './methods/setters';
 import { getAllTools, getTool } from './methods/getters';
 
 const app = express()
@@ -18,17 +18,18 @@ app.get('/',(req,res)=>{res.status(200).send("Server ON")})
 
 app.get('/tools',getAllTools)
 app.get('/tools/:id',getTool)
+app.get('/toolsName/:name',getTool)
 
 app.post('/newTools',addTools)
-app.put('/setTools',()=>{})
-app.delete('/delTools/:id',()=>{})
+app.put('/setTools',editTools)
+app.delete('/delTools/:id',delTool)
 
 /*
 A API deve seguir o padrão REST para:
- - Listar todas as ferramentas;
- - Obter detalhes de uma ferramenta pelo ID;
- - Criar uma nova ferramenta;
- - Atualizar o status de uma ferramenta;
+ - Listar todas as ferramentas; ok
+ - Obter detalhes de uma ferramenta pelo ID; ok
+ - Criar uma nova ferramenta; ok
+ - Atualizar o status de uma ferramenta; 
  - Reservar uma ferramenta para um mecânico;
- - Deletar uma ferramenta pelo ID.
+ - Deletar uma ferramenta pelo ID. ok
 */
