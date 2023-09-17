@@ -1,3 +1,4 @@
+import { ArrowSquareLeft } from "@phosphor-icons/react";
 import axios from "axios";
 import { useState } from "react"
 import { Link } from "react-router-dom";
@@ -21,8 +22,11 @@ export default function Adicionar() {
   }
   return(
     <main style={{display:"grid",justifyContent:"center"}}>
-      <h3 style={{marginBottom:2}}>New Tool</h3>
-      <Link to={"/"}>{"<"} Voltar</Link>
+      <h3 style={{marginBottom:2,display:"flex",alignItems:"center", gap:5}}>
+      <Link to={'/'} style={{padding:0,margin:0}} className="contrast">
+        <ArrowSquareLeft size={32*1.6} />
+      </Link>
+      New Tool</h3>
       <form action="">
         <label htmlFor="">Nome</label>
         <input type="text" placeholder="Chave de Fenda" 

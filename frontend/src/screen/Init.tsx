@@ -13,10 +13,10 @@ export default function Init() {
         <Wrench size={32} />
         <span>Adicionar nova ferramenta</span>
       </Link>
-      <Link to={"/reservar"} role="button" className="outline">
+      {/* <Link to={"/reservar"} role="button" className="outline">
         <CalendarPlus size={32} />
         <span>Reservar</span>
-      </Link>
+      </Link> */}
     </main>
   )
 }

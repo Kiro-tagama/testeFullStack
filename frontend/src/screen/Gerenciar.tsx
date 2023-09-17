@@ -1,6 +1,7 @@
 import { Cards } from "../components/Cards";
 import { Link } from "react-router-dom";
 import { useGerenciamento } from "../hooks/useGerenciamento";
+import { ArrowSquareLeft } from "@phosphor-icons/react";
 
 export default function Gerenciar() {
   const {data, search, setSearch} = useGerenciamento()
@@ -9,13 +10,13 @@ export default function Gerenciar() {
     <main>
       <nav> 
         <div>
-          <Link to={'/'} style={{padding:0,margin:0}} >
-            <button className="outline contrast">{"<"} Voltar</button>
+          <Link to={'/'} style={{padding:0,margin:0}} className="contrast">
+            <ArrowSquareLeft size={32*1.6} />
           </Link>
           
           <input type="search" placeholder="buscar por nome ou id" value={search} style={{width:"auto"}} onChange={txt=>setSearch(txt.target.value)}/>
-  
-          <details role="list">
+          <div></div>
+          {/* <details role="list">
             <summary aria-haspopup="listbox">Status <span style={{width:"3rem"}}/></summary>
             <ul role="listbox" >
               <li>
@@ -37,8 +38,8 @@ export default function Gerenciar() {
                 </label>
               </li>
             </ul>
-          </details>
-        </div>
+          </details>*/}
+        </div> 
         
       </nav>
       <div className="areaCards">
