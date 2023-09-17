@@ -34,7 +34,7 @@ export function Cards({data}:PropsData) {
   } = useCards(data)
   
   return(
-    <article className="card" key={id.toFixed()}>
+    <>
       <div>
         <h4 style={{marginBottom:6}}>{name}</h4>
         <small style={{marginLeft:"auto"}}>#{id.toFixed()}</small>
@@ -73,6 +73,6 @@ export function Cards({data}:PropsData) {
         setPutData={setPutData}
         editTool={editTool}
       />
-    </article>
+    </>
   )
 }

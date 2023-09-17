@@ -13,9 +13,9 @@ export function EditModal(
   
   function clean() {
     setPutData({...putData, 
-      initial_date:null,
-      final_date:null,
-      user:null,
+      initial_date:"",
+      final_date:"",
+      user:"",
       status:"Disponível"
     })
   }
@@ -29,13 +29,14 @@ export function EditModal(
         >
         </a>
         <h3>Editar</h3>
+        <form>
           <label htmlFor="">Nome</label>
           <input type="text" placeholder="Chave de Fenda" 
             //@ts-ignore
             value={putData.name}
             aria-invalid={putData.name.length <=3 ? "true" : "false"}
             onChange={txt => setPutData({...putData, name:txt.target.value})}
-          />
+            />
 
           <label htmlFor="">Locador</label>
           <input type="text" placeholder="João" 
@@ -54,18 +55,19 @@ export function EditModal(
             aria-valuemin={(new Date().getTime())}
             value={putData.final_date}
             onChange={txt => setPutData({...putData, final_date:txt.target.value})}
-          />
+            />
           <label htmlFor="">Descrição</label>
           {/* @ts-ignore */}
           <textarea cols="30" rows="5" value={putData.description} 
             onChange={txt => setPutData({...putData, description:txt.target.value})}
-          />
+            />
           <button
             className="outline"
             onClick={()=>clean()}
-          >
+            >
             Liberar ferramenta
           </button>
+        </form>
         <footer>
           <a href="#cancel"
             role="button"

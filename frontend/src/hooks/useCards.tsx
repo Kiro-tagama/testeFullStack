@@ -35,7 +35,7 @@ export function useCards(data: PropsPutData) {
   function editTool() {
     axios.put("http://localhost:3000/setTools",putData)
     .then(res=>console.log("put: "+res))
-    .catch(err=>console.log(err))
+    .catch(err=>console.log("puterr"+err))
   }
 
   useEffect(()=>{

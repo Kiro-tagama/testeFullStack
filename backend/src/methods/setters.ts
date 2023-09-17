@@ -9,9 +9,9 @@ export async function addTools(req: Request, res: Response) {
       name         : req.body.name,
       description  : req.body.description,
       status       : "Disponível",
-      initial_date : null,
-      final_date   : null,
-      user         : null,
+      initial_date : "",
+      final_date   : "",
+      user         : "",
     }
   })
 
@@ -38,7 +38,7 @@ export async function editTools(req: Request, res: Response) {
       status       : status,
       initial_date : initial_date,
       final_date   : final_date,
-      user         : user,
+      user         : user
     },
   })
 }

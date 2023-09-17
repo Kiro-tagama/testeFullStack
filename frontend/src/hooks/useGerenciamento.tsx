@@ -14,10 +14,13 @@ interface PropsData{
 export function useGerenciamento() {
   const [data, setData] = useState<PropsData[]|null>(null);
   const [search, setSearch] = useState<string>("");
+  const [status, setStatus] = useState({
+    disponivel:false,
+    reservado:false,
+    emuso:false
+  })
 
   async function getData(){
-    console.log("getdata called");
-
     if (/^[0-9]+$/.test(search)) {
       axios.get("http://localhost:3000/tools/"+search)
       .then(res=>setData([res.data]))
@@ -35,5 +38,5 @@ export function useGerenciamento() {
 
   useEffect(() =>{getData()},[search])
 
-  return {data, search, setSearch}
+  return {data, search, setSearch, status, setStatus}
 }
