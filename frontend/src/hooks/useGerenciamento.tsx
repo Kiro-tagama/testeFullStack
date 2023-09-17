@@ -6,8 +6,8 @@ interface PropsData{
   name:         String
   description:  String
   status:       "Disponível"| "Reservado" | "Em Uso"
-  initial_date: Date
-  final_date:   Date
+  initial_date: String
+  final_date:   String
   user:         String
 }
 

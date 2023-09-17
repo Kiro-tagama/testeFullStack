@@ -1,25 +1,25 @@
-import { useCards } from "../../hooks/useCards"
-
 interface PropsData{
-  data:{
-    id:           Number     
-    name:         String
-    description:  String
-    status:       "Disponível"| "Reservado" | "Em Uso"
-    initial_date: Date
-    final_date:   Date
-    user:         String
-  }
+  editModalStatus:boolean
+  setEditModalStatus:any
+  putData:any
+  setPutData:any
+  editTool:any
 }
 
-export function EditModal({data}: PropsData){
-  const {
-    editModalStatus,setEditModalStatus,
-    editTool,putData,setPutData
-  } = useCards(data)
-
-  console.log(editModalStatus);
+export function EditModal(
+  {editModalStatus,setEditModalStatus,
+  putData,setPutData,editTool}: PropsData)
+  {
   
+  function clean() {
+    setPutData({...putData, 
+      initial_date:null,
+      final_date:null,
+      user:null,
+      status:"Disponível"
+    })
+  }
+
   return(
     <dialog open={editModalStatus}>
       <article>
@@ -29,7 +29,6 @@ export function EditModal({data}: PropsData){
         >
         </a>
         <h3>Editar</h3>
-        <form action="">
           <label htmlFor="">Nome</label>
           <input type="text" placeholder="Chave de Fenda" 
             //@ts-ignore
@@ -38,24 +37,35 @@ export function EditModal({data}: PropsData){
             onChange={txt => setPutData({...putData, name:txt.target.value})}
           />
 
-          <label htmlFor="">Data Inicial</label>
-          <input type="date" name="data" id="" />
-          <label htmlFor="">Data Final</label>
-          <input type="date" name="data" id="" />
-
           <label htmlFor="">Locador</label>
           <input type="text" placeholder="João" 
             //@ts-ignore
             value={putData.user}
             onChange={txt => setPutData({...putData, user:txt.target.value})}
           />
-
+          <label htmlFor="">Data Inicial</label>
+          <input type="date" name="data" id=""
+            aria-valuemin={(new Date().getTime())}
+            value={putData.initial_date}
+            onChange={txt => setPutData({...putData, initial_date:txt.target.value})}
+          />
+          <label htmlFor="">Data Final</label>
+          <input type="date" name="data" id=""
+            aria-valuemin={(new Date().getTime())}
+            value={putData.final_date}
+            onChange={txt => setPutData({...putData, final_date:txt.target.value})}
+          />
           <label htmlFor="">Descrição</label>
           {/* @ts-ignore */}
           <textarea cols="30" rows="5" value={putData.description} 
             onChange={txt => setPutData({...putData, description:txt.target.value})}
           />
-        </form>
+          <button
+            className="outline"
+            onClick={()=>clean()}
+          >
+            Liberar ferramenta
+          </button>
         <footer>
           <a href="#cancel"
             role="button"

@@ -1,25 +1,19 @@
-import { useCards } from "../../hooks/useCards"
-
 interface PropsData{
   data:{
     id:           Number     
     name:         String
     description:  String
     status:       "Disponível"| "Reservado" | "Em Uso"
-    initial_date: Date
-    final_date:   Date
+    initial_date: String
+    final_date:   String
     user:         String
   }
+  trashModalStatus :any
+  setTrashModalStatus:any
+  delTool:any
 }
 
-export function TrashModal({data}: PropsData){
-  const {
-    trashModalStatus,setTrashModalStatus,
-    delTool
-  } = useCards(data)
-
-  console.log(data);
-
+export function TrashModal({data,trashModalStatus,setTrashModalStatus,delTool}: PropsData){
   return (
   <dialog open={trashModalStatus}>
     <article>

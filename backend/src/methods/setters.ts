@@ -13,9 +13,9 @@ export async function addTools(req: Request, res: Response) {
       final_date   : null,
       user         : null,
     }
-  }).then(() => res.status(200).send("add new tools "+ req.body.name))
+  })
 
-  res.status(404).json({ status: '404 Not Found' })
+  res.status(200).send("add new tools "+ req.body.name)
 }
 
 export async function editTools(req: Request, res: Response) {

@@ -9,8 +9,8 @@ interface PropsData{
     name:         String
     description:  String
     status:       "Disponível"| "Reservado" | "Em Uso"
-    initial_date: Date
-    final_date:   Date
+    initial_date: String
+    final_date:   String
     user:         String
   }
 }
@@ -27,11 +27,12 @@ export function Cards({data}:PropsData) {
   } = data
 
   const {
-    setTrashModalStatus,
-    setEditModalStatus,
-    statusIcon
+    trashModalStatus,setTrashModalStatus,
+    editModalStatus,setEditModalStatus,
+    delTool,editTool,statusIcon,
+    putData,setPutData
   } = useCards(data)
-
+  
   return(
     <article className="card" key={id.toFixed()}>
       <div>
@@ -44,14 +45,15 @@ export function Cards({data}:PropsData) {
       </div>
       {status != "Disponível"?
       <>
-        <span>Data Inicial: {initial_date.getTime()}</span>
-        <span>Data Final: {final_date.getTime()}</span>
+        <span>Data Inicial: {initial_date}</span>
+        <span>Data Final: {final_date}</span>
         <p>Locador: {user}</p>
-      </>:null
+      </>: null
       }
+      <div style={{flex:1}}></div>
       <div>
-        <button onClick={()=>setTrashModalStatus(true)}><Trash size={32} /></button>
-        <button onClick={()=>setEditModalStatus(true)}><PencilSimpleLine size={32} /></button>
+        <button onClick={()=>setTrashModalStatus(!trashModalStatus)}><Trash size={32} /></button>
+        <button onClick={()=>setEditModalStatus(!editModalStatus)}><PencilSimpleLine size={32} /></button>
       </div>
       <details style={{margin:0,marginTop:"auto"}}>
         <summary>Descrição</summary>
@@ -59,8 +61,18 @@ export function Cards({data}:PropsData) {
       </details>
 
       {/* modal */}
-      <TrashModal data={data}/>
-      <EditModal data={data}/>
+      <TrashModal data={data}
+        trashModalStatus={trashModalStatus}
+        setTrashModalStatus={setTrashModalStatus}
+        delTool={delTool}
+      />
+      <EditModal 
+        editModalStatus={editModalStatus}
+        setEditModalStatus={setEditModalStatus}
+        putData={putData}
+        setPutData={setPutData}
+        editTool={editTool}
+      />
     </article>
   )
 }
